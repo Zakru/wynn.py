@@ -21,7 +21,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from .requests import request, ObjectFromDict
+from .requests import requestObject, ObjectFromDict
 
 
 def getPlayer(name):
@@ -35,7 +35,7 @@ def getPlayer(name):
     :rtype: :class:`Player`
     """
 
-    return Player(request(
+    return Player(requestObject(
         'https://api.wynncraft.com/v2/player/{0}/stats',
         name
         ))

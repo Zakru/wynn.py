@@ -26,7 +26,7 @@ import urllib.request
 import urllib.parse
 
 
-def requestPlain(url, *args, **kwargs):
+def request(url, *args, **kwargs):
     """Requests a single JSON resource from the Wynncraft API.
 
     :param url: The URL of the resource to fetch
@@ -48,6 +48,22 @@ def requestPlain(url, *args, **kwargs):
     response.close()
     return data
 
+def requestLegacy(url, *args, **kwargs):
+    """Requests a single JSON resource from the Wynncraft API in the
+    legacy format.
+
+    :param url: The URL of the resource to fetch
+    :type url: :class:`str`
+    :param args: Positional arguments to pass to the URL
+    :param kwargs: Keyword arguments (:class:`str`) to pass to the URL
+
+    :returns: The returned JSON object as a :class:`dict`
+    :rtype: :class:`dict`
+    """
+    data = request(url, *args, **kwargs)
+    del data['request']
+    return data
+
 
 def requestList(url, *args, **kwargs):
     """Requests a list of objects from the Wynncraft API in the most
@@ -61,10 +77,10 @@ def requestList(url, *args, **kwargs):
     :returns: The returned ``data`` as a :class:`dict`
     :rtype: :class:`dict`
     """
-    return requestPlain(url, *args, **kwargs)['data']
+    return request(url, *args, **kwargs)['data']
 
 
-def request(url, *args, **kwargs):
+def requestObject(url, *args, **kwargs):
     """Requests a single object from the Wynncraft API in the most
     commonly used format.
 

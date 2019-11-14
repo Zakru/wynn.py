@@ -21,7 +21,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from .requests import requestPlain, ObjectFromDict
+from .requests import requestLegacy, ObjectFromDict
 
 
 def getGuilds():
@@ -32,7 +32,7 @@ def getGuilds():
        all Wynncraft guilds.
     :rtype: :class:`list`
     """
-    return requestPlain(
+    return requestLegacy(
         'https://api.wynncraft.com/public_api.php?action=guildList'
         )['guilds']
 
@@ -47,7 +47,7 @@ def getGuild(name):
     :returns: The information of the guild as returned by the API
     :rtype: :class:`ObjectFromDict <wynn.requests.ObjectFromDict>`
     """
-    return Guild(requestPlain(
+    return Guild(requestLegacy(
         'https://api.wynncraft.com/public_api.php?action=guildStats&command={0}',
         name
         ))

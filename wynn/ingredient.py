@@ -21,7 +21,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from .requests import requestList, request, ObjectFromDict
+from .requests import requestList, requestObject, ObjectFromDict
 
 
 def getIngredientNames():
@@ -47,7 +47,7 @@ def getIngredient(name):
     :returns: The Ingredient returned by the API
     :rtype: :class:`ObjectFromDict <wynn.requests.ObjectFromDict>`
     """
-    return ObjectFromDict(request(
+    return ObjectFromDict(requestObject(
         'https://api.wynncraft.com/v2/ingredient/get/{0}',
         name.replace(' ', '_')
         ))
