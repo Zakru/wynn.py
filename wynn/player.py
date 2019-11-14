@@ -23,6 +23,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 from .requests import request, ObjectFromDict
 
+
 def getPlayer(name):
     """Gets a :class:`Player` object from the Wynncraft API. Uses
     https://docs.wynncraft.com/Player-API/#statistics.
@@ -38,6 +39,7 @@ def getPlayer(name):
         'https://api.wynncraft.com/v2/player/{0}/stats',
         name
         ))
+
 
 class Player(ObjectFromDict):
     """Contains Player data in the Wynncraft API format. The format may

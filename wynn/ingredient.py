@@ -23,6 +23,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 from .requests import requestList, request, ObjectFromDict
 
+
 def getIngredientNames():
     """Gets a :class:`list` of :class:`str` objects containing all
     ingredient names from the Wynncraft API. Uses
@@ -32,6 +33,7 @@ def getIngredientNames():
     :rtype: :class:`list`
     """
     return requestList('https://api.wynncraft.com/v2/ingredient/list')
+
 
 def getIngredient(name):
     """Gets an Ingredient as an

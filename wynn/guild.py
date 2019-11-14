@@ -23,6 +23,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 from .requests import requestPlain, ObjectFromDict
 
+
 def getGuilds():
     """Gets a list of guild names from the Wynncraft API. Uses
     https://docs.wynncraft.com/Guild-API/#list.
@@ -34,6 +35,7 @@ def getGuilds():
     return requestPlain(
         'https://api.wynncraft.com/public_api.php?action=guildList'
         )['guilds']
+
 
 def getGuild(name):
     """Gets a guild's information from the Wynncraft API. Uses
@@ -49,6 +51,7 @@ def getGuild(name):
         'https://api.wynncraft.com/public_api.php?action=guildStats&command={0}',
         name
         ))
+
 
 class Guild(ObjectFromDict):
     """Contains Guild data in the Wynncraft API format. The format may

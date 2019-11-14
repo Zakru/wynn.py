@@ -25,6 +25,7 @@ import json
 import urllib.request
 import urllib.parse
 
+
 def requestPlain(url, *args, **kwargs):
     """Requests a single JSON resource from the Wynncraft API.
 
@@ -47,6 +48,7 @@ def requestPlain(url, *args, **kwargs):
     response.close()
     return data
 
+
 def requestList(url, *args, **kwargs):
     """Requests a list of objects from the Wynncraft API in the most
     commonly used format.
@@ -60,6 +62,7 @@ def requestList(url, *args, **kwargs):
     :rtype: :class:`dict`
     """
     return requestPlain(url, *args, **kwargs)['data']
+
 
 def request(url, *args, **kwargs):
     """Requests a single object from the Wynncraft API in the most
@@ -75,6 +78,7 @@ def request(url, *args, **kwargs):
     :rtype: :class:`dict`
     """
     return requestList(url, *args, **kwargs)[0]
+
 
 class ObjectFromDict:
     """Recursively wraps a :class:`dict` in a Python object.
