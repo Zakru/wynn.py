@@ -24,43 +24,43 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 from .requests import requestPlain, ObjectFromDict
 
 def getGuilds():
-	"""Gets a list of guild names from the Wynncraft API. Uses
-	https://docs.wynncraft.com/Guild-API/#list.
-	
-	:returns: A :class:`list` of :class:`str` containing the names of
-	   all Wynncraft guilds.
-	:rtype: :class:`list`
-	"""
-	return requestPlain(
-		'https://api.wynncraft.com/public_api.php?action=guildList'
-		)['guilds']
+    """Gets a list of guild names from the Wynncraft API. Uses
+    https://docs.wynncraft.com/Guild-API/#list.
+
+    :returns: A :class:`list` of :class:`str` containing the names of
+       all Wynncraft guilds.
+    :rtype: :class:`list`
+    """
+    return requestPlain(
+        'https://api.wynncraft.com/public_api.php?action=guildList'
+        )['guilds']
 
 def getGuild(name):
-	"""Gets a guild's information from the Wynncraft API. Uses
-	https://docs.wynncraft.com/Guild-API/#statistics.
+    """Gets a guild's information from the Wynncraft API. Uses
+    https://docs.wynncraft.com/Guild-API/#statistics.
 
-	:param name: 
-	:type name: :class:`str`
+    :param name:
+    :type name: :class:`str`
 
-	:returns: The information of the guild as returned by the API
-	:rtype: :class:`ObjectFromDict <wynn.requests.ObjectFromDict>`
-	"""
-	return Guild(requestPlain(
-		'https://api.wynncraft.com/public_api.php?action=guildStats&command={0}',
-		name
-		))
+    :returns: The information of the guild as returned by the API
+    :rtype: :class:`ObjectFromDict <wynn.requests.ObjectFromDict>`
+    """
+    return Guild(requestPlain(
+        'https://api.wynncraft.com/public_api.php?action=guildStats&command={0}',
+        name
+        ))
 
 class Guild(ObjectFromDict):
-	"""Contains Guild data in the Wynncraft API format. The format may
-	be found at https://docs.wynncraft.com/Guild-API/#statistics.
+    """Contains Guild data in the Wynncraft API format. The format may
+    be found at https://docs.wynncraft.com/Guild-API/#statistics.
 
-	:param data: The parsed JSON data from the Wynncraft API
-	:type data: :class:`dict`
+    :param data: The parsed JSON data from the Wynncraft API
+    :type data: :class:`dict`
 
-	:ivar owner: The owner member of this guild
-	:vartype owner: :class:`str`
-	"""
+    :ivar owner: The owner member of this guild
+    :vartype owner: :class:`str`
+    """
 
-	def __init__(self, data):
-		super(Guild, self).__init__(data)
-		self.owner = [member for member in self.members if member.rank == 'OWNER'][0]
+    def __init__(self, data):
+        super(Guild, self).__init__(data)
+        self.owner = [member for member in self.members if member.rank == 'OWNER'][0]

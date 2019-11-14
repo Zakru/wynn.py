@@ -26,80 +26,80 @@ import urllib.request
 import urllib.parse
 
 def requestPlain(url, *args, **kwargs):
-	"""Requests a single JSON resource from the Wynncraft API.
-	
-	:param url: The URL of the resource to fetch
-	:type url: :class:`str`
-	:param args: Positional arguments to pass to the URL
-	:param kwargs: Keyword arguments (:class:`str`) to pass to the URL
-	
-	:returns: The returned JSON object as a :class:`dict`
-	:rtype: :class:`dict`
-	"""
-	parsedArgs = (urllib.parse.quote(a) for a in args)
+    """Requests a single JSON resource from the Wynncraft API.
 
-	parsedKwargs = {}
-	for k,v in kwargs.items():
-		parsedKwargs[k] = urllib.parse.quote(v)
+    :param url: The URL of the resource to fetch
+    :type url: :class:`str`
+    :param args: Positional arguments to pass to the URL
+    :param kwargs: Keyword arguments (:class:`str`) to pass to the URL
 
-	response = urllib.request.urlopen(url.format(*args, **kwargs))
-	data = json.load(response)
-	response.close()
-	return data
+    :returns: The returned JSON object as a :class:`dict`
+    :rtype: :class:`dict`
+    """
+    parsedArgs = (urllib.parse.quote(a) for a in args)
+
+    parsedKwargs = {}
+    for k,v in kwargs.items():
+        parsedKwargs[k] = urllib.parse.quote(v)
+
+    response = urllib.request.urlopen(url.format(*args, **kwargs))
+    data = json.load(response)
+    response.close()
+    return data
 
 def requestList(url, *args, **kwargs):
-	"""Requests a list of objects from the Wynncraft API in the most
-	commonly used format.
-	
-	:param url: The URL of the resource to fetch
-	:type url: :class:`str`
-	:param args: Positional arguments to pass to the URL
-	:param kwargs: Keyword arguments to pass to the URL
-	
-	:returns: The returned ``data`` as a :class:`dict`
-	:rtype: :class:`dict`
-	"""
-	return requestPlain(url, *args, **kwargs)['data']
+    """Requests a list of objects from the Wynncraft API in the most
+    commonly used format.
+
+    :param url: The URL of the resource to fetch
+    :type url: :class:`str`
+    :param args: Positional arguments to pass to the URL
+    :param kwargs: Keyword arguments to pass to the URL
+
+    :returns: The returned ``data`` as a :class:`dict`
+    :rtype: :class:`dict`
+    """
+    return requestPlain(url, *args, **kwargs)['data']
 
 def request(url, *args, **kwargs):
-	"""Requests a single object from the Wynncraft API in the most
-	commonly used format.
-	
-	:param url: The URL of the resource to fetch
-	:type url: :class:`str`
-	:param args: Positional arguments to pass to the URL
-	:param kwargs: Keyword arguments to pass to the URL
-	
-	:returns: The first element of the returned ``data`` as a
-	   :class:`dict`
-	:rtype: :class:`dict`
-	"""
-	return requestList(url, *args, **kwargs)[0]
+    """Requests a single object from the Wynncraft API in the most
+    commonly used format.
+
+    :param url: The URL of the resource to fetch
+    :type url: :class:`str`
+    :param args: Positional arguments to pass to the URL
+    :param kwargs: Keyword arguments to pass to the URL
+
+    :returns: The first element of the returned ``data`` as a
+       :class:`dict`
+    :rtype: :class:`dict`
+    """
+    return requestList(url, *args, **kwargs)[0]
 
 class ObjectFromDict:
-	"""Recursively wraps a :class:`dict` in a Python object.
-	
-	Example use::
-	
-	   >>> o = ObjectFromDict({'foo': 'bar'})
-	   >>> o.foo
-	   'bar'
-	
-	:param data: The parsed JSON data from the Wynncraft API
-	:type data: :class:`dict`
-	"""
+    """Recursively wraps a :class:`dict` in a Python object.
 
-	def __init__(self, data):
-		for k,v in data.items():
-			self.__dict__[k] = self.handleItem(v)
+    Example use::
 
-	def handleItem(self, item):
-			if isinstance(item, dict):
-				return ObjectFromDict(item)
-			elif isinstance(item, list):
-				return [self.handleItem(v) for v in item]
-			else:
-				return item
+       >>> o = ObjectFromDict({'foo': 'bar'})
+       >>> o.foo
+       'bar'
 
-	def __repr__(self):
-		return dict.__repr__(self.__dict__)
+    :param data: The parsed JSON data from the Wynncraft API
+    :type data: :class:`dict`
+    """
+
+    def __init__(self, data):
+        for k,v in data.items():
+            self.__dict__[k] = self.handleItem(v)
+
+    def handleItem(self, item):
+            if isinstance(item, dict):
+                return ObjectFromDict(item)
+            elif isinstance(item, list):
+                return [self.handleItem(v) for v in item]
+            else:
+                return item
+
+    def __repr__(self):
+        return dict.__repr__(self.__dict__)

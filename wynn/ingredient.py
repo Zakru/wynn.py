@@ -24,28 +24,28 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 from .requests import requestList, request, ObjectFromDict
 
 def getIngredientNames():
-	"""Gets a :class:`list` of :class:`str` objects containing all
-	ingredient names from the Wynncraft API. Uses
-	https://docs.wynncraft.com/Ingredient-API/#list.
-	
-	:returns: A list of all ingredient names as :class:`str`
-	:rtype: :class:`list`
-	"""
-	return requestList('https://api.wynncraft.com/v2/ingredient/list')
+    """Gets a :class:`list` of :class:`str` objects containing all
+    ingredient names from the Wynncraft API. Uses
+    https://docs.wynncraft.com/Ingredient-API/#list.
+
+    :returns: A list of all ingredient names as :class:`str`
+    :rtype: :class:`list`
+    """
+    return requestList('https://api.wynncraft.com/v2/ingredient/list')
 
 def getIngredient(name):
-	"""Gets an Ingredient as an
-	:class:`ObjectFromDict <wynn.requests.ObjectFromDict>` object from
-	the Wynncraft API. Uses
-	https://docs.wynncraft.com/Ingredient-API/#get.
-	
-	:param name: The name of the Ingredient
-	:type name: :class:`str`
-	
-	:returns: The Ingredient returned by the API
-	:rtype: :class:`ObjectFromDict <wynn.requests.ObjectFromDict>`
-	"""
-	return ObjectFromDict(request(
-		'https://api.wynncraft.com/v2/ingredient/get/{0}',
-		n.replace(' ', '_')
-		))
+    """Gets an Ingredient as an
+    :class:`ObjectFromDict <wynn.requests.ObjectFromDict>` object from
+    the Wynncraft API. Uses
+    https://docs.wynncraft.com/Ingredient-API/#get.
+
+    :param name: The name of the Ingredient
+    :type name: :class:`str`
+
+    :returns: The Ingredient returned by the API
+    :rtype: :class:`ObjectFromDict <wynn.requests.ObjectFromDict>`
+    """
+    return ObjectFromDict(request(
+        'https://api.wynncraft.com/v2/ingredient/get/{0}',
+        n.replace(' ', '_')
+        ))

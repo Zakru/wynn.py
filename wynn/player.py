@@ -24,41 +24,40 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 from .requests import request, ObjectFromDict
 
 def getPlayer(name):
-	"""Gets a :class:`Player` object from the Wynncraft API. Uses
-	https://docs.wynncraft.com/Player-API/#statistics.
-	
-	:param name: The name of the Player
-	:type name: :class:`str`
-	
-	:returns: The Player returned by the API
-	:rtype: :class:`Player`
-	"""
+    """Gets a :class:`Player` object from the Wynncraft API. Uses
+    https://docs.wynncraft.com/Player-API/#statistics.
 
-	return Player(request(
-		'https://api.wynncraft.com/v2/player/{0}/stats',
-		name
-		))
+    :param name: The name of the Player
+    :type name: :class:`str`
+
+    :returns: The Player returned by the API
+    :rtype: :class:`Player`
+    """
+
+    return Player(request(
+        'https://api.wynncraft.com/v2/player/{0}/stats',
+        name
+        ))
 
 class Player(ObjectFromDict):
-	"""Contains Player data in the Wynncraft API format. The format may
-	be found at https://docs.wynncraft.com/Player-API/#statistics.
-	
-	:param data: The parsed JSON data from the Wynncraft API
-	:type data: :class:`dict`
-	
-	:ivar classesDict: A :class:`dict` containing key-value pairs of
-	   character class name → character class object
-	:vartype classesDict: :class:`dict`
-	:ivar classNames: A :class:`list` containing the names of the
-	   player's character classes
-	:vartype classNames: :class:`list`
-	"""
+    """Contains Player data in the Wynncraft API format. The format may
+    be found at https://docs.wynncraft.com/Player-API/#statistics.
 
-	def __init__(self, data):
-		super(Player, self).__init__(data)
-		self.classesDict = {}
-		self.classNames = []
-		for cls in self.classes:
-			self.classesDict[cls.name] = cls
-			self.classNames.append(cls.name)
-		
+    :param data: The parsed JSON data from the Wynncraft API
+    :type data: :class:`dict`
+
+    :ivar classesDict: A :class:`dict` containing key-value pairs of
+       character class name → character class object
+    :vartype classesDict: :class:`dict`
+    :ivar classNames: A :class:`list` containing the names of the
+       player's character classes
+    :vartype classNames: :class:`list`
+    """
+
+    def __init__(self, data):
+        super(Player, self).__init__(data)
+        self.classesDict = {}
+        self.classNames = []
+        for cls in self.classes:
+            self.classesDict[cls.name] = cls
+            self.classNames.append(cls.name)
