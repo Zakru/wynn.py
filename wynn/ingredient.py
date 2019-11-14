@@ -31,7 +31,7 @@ def getIngredientNames():
 	:returns: A list of all ingredient names as :class:`str`
 	:rtype: :class:`list`
 	"""
-	return requestList("https://api.wynncraft.com/v2/ingredient/list")
+	return requestList('https://api.wynncraft.com/v2/ingredient/list')
 
 def getIngredient(name):
 	"""Gets an Ingredient as an
@@ -46,6 +46,6 @@ def getIngredient(name):
 	:rtype: :class:`ObjectFromDict <wynn.requests.ObjectFromDict>`
 	"""
 	return ObjectFromDict(request(
-		"https://api.wynncraft.com/v2/ingredient/get/{0}",
-		n.replace(" ", "_")
+		'https://api.wynncraft.com/v2/ingredient/get/{0}',
+		n.replace(' ', '_')
 		))

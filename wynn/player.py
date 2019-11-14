@@ -35,7 +35,7 @@ def getPlayer(name):
 	"""
 
 	return Player(request(
-		"https://api.wynncraft.com/v2/player/{0}/stats",
+		'https://api.wynncraft.com/v2/player/{0}/stats',
 		name
 		))
 
