@@ -23,6 +23,15 @@ Player
 .. autoclass:: Player
    :members:
 
+Guild
+----------
+
+.. module:: wynn.guild
+
+.. autofunction:: getGuilds
+
+.. autofunction:: getGuild
+
 Ingredient
 ----------
 

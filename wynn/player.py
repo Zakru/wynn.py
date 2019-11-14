@@ -34,8 +34,10 @@ def getPlayer(name):
 	:rtype: :class:`Player`
 	"""
 
-	url = "https://api.wynncraft.com/v2/player/{0}/stats".format(name)
-	return Player(request(url))
+	return Player(request(
+		"https://api.wynncraft.com/v2/player/{0}/stats",
+		name
+		))
 
 class Player(ObjectFromDict):
 	"""Contains Player data in the Wynncraft API format. The format may

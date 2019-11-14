@@ -21,31 +21,31 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from .requests import requestList, request, ObjectFromDict
+from .requests import requestPlain, ObjectFromDict
 
-def getIngredientNames():
-	"""Gets a :class:`list` of :class:`str` objects containing all
-	ingredient names from the Wynncraft API. Uses
-	https://docs.wynncraft.com/Ingredient-API/#list.
+def getGuilds():
+	"""Gets a list of guild names from the Wynncraft API. Uses
+	https://docs.wynncraft.com/Guild-API/#list.
 	
-	:returns: A list of all ingredient names as :class:`str`
+	:returns: A :class:`list` of :class:`str` containing the names of
+	   all Wynncraft guilds.
 	:rtype: :class:`list`
 	"""
-	return requestList("https://api.wynncraft.com/v2/ingredient/list")
+	return requestPlain(
+		'https://api.wynncraft.com/public_api.php?action=guildList'
+		)['guilds']
 
-def getIngredient(name):
-	"""Gets an Ingredient as an
-	:class:`ObjectFromDict <wynn.requests.ObjectFromDict>` object from
-	the Wynncraft API. Uses
-	https://docs.wynncraft.com/Ingredient-API/#get.
+def getGuild(name):
+	"""Gets a guild's information from the Wynncraft API. Uses
+	https://docs.wynncraft.com/Guild-API/#statistics.
 	
-	:param name: The name of the Ingredient
+	:param name: 
 	:type name: :class:`str`
 	
-	:returns: The Ingredient returned by the API
+	:returns: The information of the guild as returned by the API
 	:rtype: :class:`ObjectFromDict <wynn.requests.ObjectFromDict>`
 	"""
-	return ObjectFromDict(request(
-		"https://api.wynncraft.com/v2/ingredient/get/{0}",
-		n.replace(" ", "_")
+	return ObjectFromDict(requestPlain(
+		'https://api.wynncraft.com/public_api.php?action=guildStats&command={0}',
+		name
 		))

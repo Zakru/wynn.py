@@ -20,34 +20,61 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+
 import json
 import urllib.request
 import urllib.parse
 
-def requestList(url):
-	"""Requests a list of objects from the Wynncraft API.
+def requestPlain(url, *args, **kwargs):
+	"""Requests a single JSON resource from the Wynncraft API.
 	
 	:param url: The URL of the resource to fetch
 	:type url: :class:`str`
+	:param args: Positional arguments to pass to the URL
+	:param kwargs: Keyword arguments (:class:`str`) to pass to the URL
 	
-	:returns: The returned JSON data in a :class:`dict`
+	:returns: The returned JSON object as a :class:`dict`
 	:rtype: :class:`dict`
 	"""
-	response = urllib.request.urlopen(urllib.parse.quote(url, ':/'))
+	parsedArgs = (urllib.parse.quote(a) for a in args)
+
+	parsedKwargs = {}
+	for k,v in kwargs.items():
+		parsedKwargs[k] = urllib.parse.quote(v)
+
+	response = urllib.request.urlopen(url.format(*args, **kwargs))
 	data = json.load(response)
 	response.close()
-	return data['data']
+	return data
 
-def request(url):
-	"""Requests a single object from the Wynncraft API.
+def requestList(url, *args, **kwargs):
+	"""Requests a list of objects from the Wynncraft API in the most
+	commonly used format.
 	
 	:param url: The URL of the resource to fetch
 	:type url: :class:`str`
+	:param args: Positional arguments to pass to the URL
+	:param kwargs: Keyword arguments to pass to the URL
 	
-	:returns: The returned JSON data in a :class:`dict`
+	:returns: The returned ``data`` as a :class:`dict`
 	:rtype: :class:`dict`
 	"""
-	return requestList(url)[0]
+	return requestPlain(url, *args, **kwargs)['data']
+
+def request(url, *args, **kwargs):
+	"""Requests a single object from the Wynncraft API in the most
+	commonly used format.
+	
+	:param url: The URL of the resource to fetch
+	:type url: :class:`str`
+	:param args: Positional arguments to pass to the URL
+	:param kwargs: Keyword arguments to pass to the URL
+	
+	:returns: The first element of the returned ``data`` as a
+	   :class:`dict`
+	:rtype: :class:`dict`
+	"""
+	return requestList(url, *args, **kwargs)[0]
 
 class ObjectFromDict:
 	"""Recursively wraps a :class:`dict` in a Python object.
