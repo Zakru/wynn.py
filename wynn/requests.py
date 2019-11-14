@@ -95,13 +95,13 @@ class ObjectFromDict:
 
     def __init__(self, data):
         for k,v in data.items():
-            self.__dict__[k] = self.handleItem(v)
+            self.__dict__[k] = self._handleItem(v)
 
-    def handleItem(self, item):
+    def _handleItem(self, item):
             if isinstance(item, dict):
                 return ObjectFromDict(item)
             elif isinstance(item, list):
-                return [self.handleItem(v) for v in item]
+                return [self._handleItem(v) for v in item]
             else:
                 return item
 
