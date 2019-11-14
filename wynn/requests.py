@@ -100,3 +100,6 @@ class ObjectFromDict:
 				return [self.handleItem(v) for v in item]
 			else:
 				return item
+
+	def __repr__(self):
+		return dict.__repr__(self.__dict__)
