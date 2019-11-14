@@ -38,14 +38,29 @@ def getGuilds():
 def getGuild(name):
 	"""Gets a guild's information from the Wynncraft API. Uses
 	https://docs.wynncraft.com/Guild-API/#statistics.
-	
+
 	:param name: 
 	:type name: :class:`str`
-	
+
 	:returns: The information of the guild as returned by the API
 	:rtype: :class:`ObjectFromDict <wynn.requests.ObjectFromDict>`
 	"""
-	return ObjectFromDict(requestPlain(
+	return Guild(requestPlain(
 		'https://api.wynncraft.com/public_api.php?action=guildStats&command={0}',
 		name
 		))
+
+class Guild(ObjectFromDict):
+	"""Contains Guild data in the Wynncraft API format. The format may
+	be found at https://docs.wynncraft.com/Guild-API/#statistics.
+
+	:param data: The parsed JSON data from the Wynncraft API
+	:type data: :class:`dict`
+
+	:ivar owner: The owner member of this guild
+	:vartype owner: :class:`str`
+	"""
+
+	def __init__(self, data):
+		super(Guild, self).__init__(data)
+		self.owner = [member for member in self.members if member.rank == 'OWNER'][0]

@@ -24,7 +24,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 from .requests import request, ObjectFromDict
 
 def getPlayer(name):
-	"""Gets a :py:class:`Player` object from the Wynncraft API. Uses
+	"""Gets a :class:`Player` object from the Wynncraft API. Uses
 	https://docs.wynncraft.com/Player-API/#statistics.
 	
 	:param name: The name of the Player

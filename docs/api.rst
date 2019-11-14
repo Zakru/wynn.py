@@ -32,6 +32,9 @@ Guild
 
 .. autofunction:: getGuild
 
+.. autoclass:: Guild
+   :members:
+
 Ingredient
 ----------
 
