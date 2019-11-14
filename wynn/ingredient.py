@@ -47,5 +47,5 @@ def getIngredient(name):
     """
     return ObjectFromDict(request(
         'https://api.wynncraft.com/v2/ingredient/get/{0}',
-        n.replace(' ', '_')
+        name.replace(' ', '_')
         ))

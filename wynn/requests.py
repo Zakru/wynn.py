@@ -42,7 +42,7 @@ def requestPlain(url, *args, **kwargs):
     for k,v in kwargs.items():
         parsedKwargs[k] = urllib.parse.quote(v)
 
-    response = urllib.request.urlopen(url.format(*args, **kwargs))
+    response = urllib.request.urlopen(url.format(*parsedArgs, **parsedKwargs))
     data = json.load(response)
     response.close()
     return data
