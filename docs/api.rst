@@ -24,7 +24,7 @@ Player
    :members:
 
 Guild
-----------
+-----
 
 .. module:: wynn.guild
 
@@ -45,10 +45,28 @@ Ingredient
 .. autofunction:: getIngredient
 
 Network
-----------
+-------
 
 .. module:: wynn.network
 
 .. autofunction:: getServers
 
 .. autofunction:: getPlayerSum
+
+Leaderboard
+-----------
+
+.. module:: wynn.leaderboard
+
+.. autofunction:: getGuildLeaderboard
+
+.. autofunction:: getPlayerLeaderboard
+
+.. autofunction:: getPVPLeaderboard
+
+Territory
+---------
+
+.. module:: wynn.territory
+
+.. autofunction:: getTerritories
