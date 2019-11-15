@@ -1,11 +1,13 @@
 from setuptools import setup
 
+from wynn import __version__ as wynnVersion
+
 with open('README.md', 'r') as f:
     readme = f.read()
 
 setup(
     name='wynn.py',
-    version='0.1.0a',
+    version=wynnVersion,
     author='Zakru',
     url='https://github.com/Zakru/wynn.py',
     description='A Python wrapper for the Wynncraft public API',

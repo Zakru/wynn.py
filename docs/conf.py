@@ -12,7 +12,10 @@
 
 import os
 import sys
+
 sys.path.insert(0, os.path.abspath('..'))
+
+from wynn import __version__ as wynnVersion
 
 
 # -- Project information -----------------------------------------------------
@@ -22,7 +25,7 @@ copyright = '2019, Zakru'
 author = 'Zakru'
 
 # The full version, including alpha/beta/rc tags
-release = '0.1.0a'
+release = wynnVersion
 
 
 # -- General configuration ---------------------------------------------------
