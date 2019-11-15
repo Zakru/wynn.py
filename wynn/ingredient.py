@@ -51,3 +51,22 @@ def getIngredient(name):
         'https://api.wynncraft.com/v2/ingredient/get/{0}',
         name.replace(' ', '_')
         ))
+
+def searchIngredients(query, args):
+    """Searches for ingredients from the Wynncraft API. See
+    https://docs.wynncraft.com/Ingredient-API/#search for query
+    format.
+
+    :param query: See above link
+    :type query: :class:`str`
+    :param args: See above link
+    :type args: :class:`str`
+
+    :returns: A list of ingredients as
+       :class:`ObjectFromDict <wynn.requests.ObjectFromDict>`
+    :rtype: :class:`list`
+    """
+    return map(ObjectFromDict, requestList(
+        'https://api.wynncraft.com/v2/ingredient/search/{0}/{1}',
+        query, args,
+        ))
