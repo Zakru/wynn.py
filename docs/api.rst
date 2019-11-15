@@ -70,3 +70,10 @@ Territory
 .. module:: wynn.territory
 
 .. autofunction:: getTerritories
+
+Search
+------
+
+.. module:: wynn.search
+
+.. autofunction:: search
