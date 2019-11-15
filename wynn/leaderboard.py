@@ -29,6 +29,7 @@ def getGuildLeaderboard(timeframe=None):
 
     :param timeframe: A time frame to get the leaderboard from. If
        ``None``, ``'alltime'`` will be used.
+
        .. note::
 
           The format is not disclosed in the Wynncraft API documentation
@@ -53,6 +54,7 @@ def getPlayerLeaderboard(timeframe=None):
 
     :param timeframe: A time frame to get the leaderboard from. If
        ``None``, ``'alltime'`` will be used.
+
        .. note::
 
           The format is not disclosed in the Wynncraft API documentation
@@ -77,6 +79,7 @@ def getPVPLeaderboard(timeframe=None):
 
     :param timeframe: A time frame to get the leaderboard from. If
        ``None``, ``'alltime'`` will be used.
+
        .. note::
 
           The format is not disclosed in the Wynncraft API documentation
