@@ -44,6 +44,19 @@ Ingredient
 
 .. autofunction:: getIngredient
 
+.. autofunction:: searchIngredients
+
+Recipe
+------
+
+.. module:: wynn.recipe
+
+.. autofunction:: getRecipeIDs
+
+.. autofunction:: getRecipe
+
+.. autofunction:: searchRecipes
+
 Network
 -------
 
