@@ -25,8 +25,9 @@ from .requests import requestObject, ObjectFromDict
 
 
 def getPlayer(name):
-    """Gets a :class:`Player` object from the Wynncraft API. Uses
-    https://docs.wynncraft.com/Player-API/#statistics.
+    """Gets a :class:`Player` object from the Wynncraft API.
+
+    Format: https://docs.wynncraft.com/Player-API/#player-object
 
     :param name: The name of the Player
     :type name: :class:`str`
@@ -42,8 +43,9 @@ def getPlayer(name):
 
 
 class Player(ObjectFromDict):
-    """Contains Player data in the Wynncraft API format. The format may
-    be found at https://docs.wynncraft.com/Player-API/#statistics.
+    """Contains Player data in the Wynncraft API format.
+
+    Format: https://docs.wynncraft.com/Player-API/#player-object
 
     :param data: The parsed JSON data from the Wynncraft API
     :type data: :class:`dict`

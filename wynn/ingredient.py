@@ -26,8 +26,7 @@ from .requests import requestList, requestObject, ObjectFromDict
 
 def getIngredientNames():
     """Gets a :class:`list` of :class:`str` objects containing all
-    ingredient names from the Wynncraft API. Uses
-    https://docs.wynncraft.com/Ingredient-API/#list.
+    ingredient names from the Wynncraft API.
 
     :returns: A list of all ingredient names as :class:`str`
     :rtype: :class:`list`
@@ -38,8 +37,9 @@ def getIngredientNames():
 def getIngredient(name):
     """Gets an Ingredient as an
     :class:`ObjectFromDict <wynn.requests.ObjectFromDict>` object from
-    the Wynncraft API. Uses
-    https://docs.wynncraft.com/Ingredient-API/#get.
+    the Wynncraft API.
+
+    Format: https://docs.wynncraft.com/Ingredient-API/#ingredient-object
 
     :param name: The name of the Ingredient
     :type name: :class:`str`

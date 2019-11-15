@@ -27,6 +27,9 @@ from .requests import requestLegacy, ObjectFromDict
 def getTerritories():
     """Gets a list of all territories.
 
+    Territory format:
+    https://docs.wynncraft.com/Territory-API/#territory-object
+
     :returns: A list of
        :class:`ObjectFromDict <wynn.requests.ObjectFromDict>`
        representing every territory

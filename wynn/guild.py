@@ -25,8 +25,7 @@ from .requests import requestLegacy, ObjectFromDict
 
 
 def getGuilds():
-    """Gets a list of guild names from the Wynncraft API. Uses
-    https://docs.wynncraft.com/Guild-API/#list.
+    """Gets a list of guild names from the Wynncraft API.
 
     :returns: A :class:`list` of :class:`str` containing the names of
        all Wynncraft guilds.
@@ -38,8 +37,9 @@ def getGuilds():
 
 
 def getGuild(name):
-    """Gets a guild's information from the Wynncraft API. Uses
-    https://docs.wynncraft.com/Guild-API/#statistics.
+    """Gets a guild's information from the Wynncraft API.
+
+    Format: https://docs.wynncraft.com/Guild-API/#guild-object
 
     :param name:
     :type name: :class:`str`
@@ -54,14 +54,15 @@ def getGuild(name):
 
 
 class Guild(ObjectFromDict):
-    """Contains Guild data in the Wynncraft API format. The format may
-    be found at https://docs.wynncraft.com/Guild-API/#statistics.
+    """Contains Guild data in the Wynncraft API format.
+
+    Format: https://docs.wynncraft.com/Guild-API/#guild-object
 
     :param data: The parsed JSON data from the Wynncraft API
     :type data: :class:`dict`
 
     :ivar owner: The owner member of this guild
-    :vartype owner: :class:`str`
+    :vartype owner: :class:`ObjectFromDict <wynn.requests.ObjectFromDict>`
     """
 
     def __init__(self, data):

@@ -27,6 +27,8 @@ from .requests import requestLegacy, ObjectFromDict
 def getServers():
     r"""Gets the currently active servers and the players on them.
 
+    Format: https://docs.wynncraft.com/Network-API/#server-list
+
     :returns: A :class:`dict` of :class:`list`\s by server name
        containing the names of the players connected to that server
     :rtype: :class:`dict`
