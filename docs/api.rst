@@ -43,3 +43,12 @@ Ingredient
 .. autofunction:: getIngredientNames
 
 .. autofunction:: getIngredient
+
+Network
+----------
+
+.. module:: wynn.network
+
+.. autofunction:: getServers
+
+.. autofunction:: getPlayerSum
