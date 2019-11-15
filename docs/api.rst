@@ -90,3 +90,10 @@ Search
 .. module:: wynn.search
 
 .. autofunction:: search
+
+Item
+----
+
+.. module:: wynn.item
+
+.. autofunction:: searchItem
