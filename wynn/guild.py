@@ -45,7 +45,7 @@ def getGuild(name):
     :type name: :class:`str`
 
     :returns: The information of the guild as returned by the API
-    :rtype: :class:`ObjectFromDict <wynn.requests.ObjectFromDict>`
+    :rtype: :class:`Guild`
     """
     return Guild(requestLegacy(
         'https://api.wynncraft.com/public_api.php?action=guildStats&command={0}',
