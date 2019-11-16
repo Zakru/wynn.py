@@ -18,6 +18,12 @@ setup(
         'Source Code': 'https://github.com/Zakru/wynn.py',
         'Issue Tracker': 'https://github.com/Zakru/wynn.py/issues',
     },
+    extras_require={
+        'docs': [
+            'sphinx~=2.2',
+            'sphinx_rtd_theme~=0.4',
+        ],
+    },
     packages=['wynn'],
     classifiers=[
         'Development Status :: 3 - Alpha',
