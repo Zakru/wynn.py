@@ -14,7 +14,7 @@ setup(
     long_description=readme,
     long_description_content_type='text/markdown',
     project_urls={
-        'Documentation': 'https://wynnpy.readthedocs.io/en/latest/',
+        'Documentation': 'https://wynnpy.readthedocs.io/en/stable/',
         'Source Code': 'https://github.com/Zakru/wynn.py',
         'Issue Tracker': 'https://github.com/Zakru/wynn.py/issues',
     },
