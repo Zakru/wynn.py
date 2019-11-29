@@ -21,20 +21,20 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from .requests import requestList, requestObject, ObjectFromDict
+from .requests import request_list, request_object, ObjectFromDict
 
 
-def getIngredientNames():
+def get_ingredient_names():
     """Gets a :class:`list` of :class:`str` objects containing all
     ingredient names from the Wynncraft API.
 
     :returns: A list of all ingredient names as :class:`str`
     :rtype: :class:`list`
     """
-    return requestList('https://api.wynncraft.com/v2/ingredient/list')
+    return request_list('https://api.wynncraft.com/v2/ingredient/list')
 
 
-def getIngredient(name):
+def get_ingredient(name):
     """Gets an Ingredient as an
     :class:`ObjectFromDict <wynn.requests.ObjectFromDict>` object from
     the Wynncraft API.
@@ -47,12 +47,12 @@ def getIngredient(name):
     :returns: The Ingredient returned by the API
     :rtype: :class:`ObjectFromDict <wynn.requests.ObjectFromDict>`
     """
-    return ObjectFromDict(requestObject(
+    return ObjectFromDict(request_object(
         'https://api.wynncraft.com/v2/ingredient/get/{0}',
         name.replace(' ', '_')
         ))
 
-def searchIngredients(query, args):
+def search_ingredients(query, args):
     """Searches for ingredients from the Wynncraft API. See
     https://docs.wynncraft.com/Ingredient-API/#search for query
     format.
@@ -66,7 +66,7 @@ def searchIngredients(query, args):
        :class:`ObjectFromDict <wynn.requests.ObjectFromDict>`
     :rtype: :class:`list`
     """
-    return map(ObjectFromDict, requestList(
+    return map(ObjectFromDict, request_list(
         'https://api.wynncraft.com/v2/ingredient/search/{0}/{1}',
         query, args,
         ))

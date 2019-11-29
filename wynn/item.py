@@ -21,10 +21,10 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from .requests import requestLegacy, ObjectFromDict
+from .requests import request_legacy, ObjectFromDict
 
 
-def searchItem(*, name=None, category=None):
+def search_item(*, name=None, category=None):
     """Searches for items. If a name is provided, will return a list of
     all items whose names contain the provided name (case insensitive).
     Otherwise, if a category is provided, will return a list
@@ -52,7 +52,7 @@ def searchItem(*, name=None, category=None):
     if category is None:
         category = ''
 
-    return map(ObjectFromDict, requestLegacy(
+    return map(ObjectFromDict, request_legacy(
         'https://api.wynncraft.com/public_api.php?action=statsSearch&search={0}&category={1}',
         name, category,
         )['items'])

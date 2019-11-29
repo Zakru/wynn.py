@@ -48,7 +48,7 @@ def request(url, *args, **kwargs):
     response.close()
     return data
 
-def requestLegacy(url, *args, **kwargs):
+def request_legacy(url, *args, **kwargs):
     """Requests a single JSON resource from the Wynncraft API in the
     legacy format.
 
@@ -65,7 +65,7 @@ def requestLegacy(url, *args, **kwargs):
     return data
 
 
-def requestList(url, *args, **kwargs):
+def request_list(url, *args, **kwargs):
     """Requests a list of objects from the Wynncraft API in the most
     commonly used format.
 
@@ -80,7 +80,7 @@ def requestList(url, *args, **kwargs):
     return request(url, *args, **kwargs)['data']
 
 
-def requestObject(url, *args, **kwargs):
+def request_object(url, *args, **kwargs):
     """Requests a single object from the Wynncraft API in the most
     commonly used format.
 
@@ -93,7 +93,7 @@ def requestObject(url, *args, **kwargs):
        :class:`dict`
     :rtype: :class:`dict`
     """
-    return requestList(url, *args, **kwargs)[0]
+    return request_list(url, *args, **kwargs)[0]
 
 
 class ObjectFromDict:
@@ -111,13 +111,13 @@ class ObjectFromDict:
 
     def __init__(self, data):
         for k,v in data.items():
-            self.__dict__[k] = self._handleItem(v)
+            self.__dict__[k] = self._handle_item(v)
 
-    def _handleItem(self, item):
+    def _handle_item(self, item):
             if isinstance(item, dict):
                 return ObjectFromDict(item)
             elif isinstance(item, list):
-                return [self._handleItem(v) for v in item]
+                return [self._handle_item(v) for v in item]
             else:
                 return item
 

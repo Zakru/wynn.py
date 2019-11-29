@@ -21,10 +21,10 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from .requests import requestLegacy, ObjectFromDict
+from .requests import request_legacy, ObjectFromDict
 
 
-def getServers():
+def get_servers():
     r"""Gets the currently active servers and the players on them.
 
     Format: https://docs.wynncraft.com/Network-API/#server-list
@@ -33,13 +33,13 @@ def getServers():
        containing the names of the players connected to that server
     :rtype: :class:`dict`
     """
-    return requestLegacy('https://api.wynncraft.com/public_api.php?action=onlinePlayers')
+    return request_legacy('https://api.wynncraft.com/public_api.php?action=onlinePlayers')
 
 
-def getPlayerSum():
+def get_player_sum():
     """Gets the current number of players on the Wynncraft network.
 
     :returns: The number of players on the Wynncraft network
     :rtype: :class:`int`
     """
-    return requestLegacy('https://api.wynncraft.com/public_api.php?action=onlinePlayersSum')['players_online']
+    return request_legacy('https://api.wynncraft.com/public_api.php?action=onlinePlayersSum')['players_online']

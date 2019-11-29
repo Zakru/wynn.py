@@ -21,10 +21,10 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from .requests import requestLegacy, ObjectFromDict
+from .requests import request_legacy, ObjectFromDict
 
 
-def getTerritories():
+def get_territories():
     """Gets a list of all territories.
 
     Territory format:
@@ -35,4 +35,4 @@ def getTerritories():
        representing every territory
     :rtype: :class:`list`
     """
-    return ObjectFromDict(requestLegacy('https://api.wynncraft.com/public_api.php?action=territoryList'))
+    return ObjectFromDict(request_legacy('https://api.wynncraft.com/public_api.php?action=territoryList'))

@@ -21,7 +21,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from .requests import requestLegacy, ObjectFromDict
+from .requests import request_legacy, ObjectFromDict
 
 
 def search(name):
@@ -34,7 +34,7 @@ def search(name):
        results and ``players`` containing player name results
     :rtype: :class:`ObjectFromDict <wynn.requests.ObjectFromDict>`
     """
-    return ObjectFromDict(requestLegacy(
+    return ObjectFromDict(request_legacy(
         'https://api.wynncraft.com/public_api.php?action=statsSearch&search={0}',
         name,
         ))

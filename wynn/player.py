@@ -21,10 +21,10 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from .requests import requestObject, ObjectFromDict
+from .requests import request_object, ObjectFromDict
 
 
-def getPlayer(name):
+def get_player(name):
     """Gets a :class:`Player` object from the Wynncraft API.
 
     Format: https://docs.wynncraft.com/Player-API/#player-object
@@ -36,7 +36,7 @@ def getPlayer(name):
     :rtype: :class:`Player`
     """
 
-    return Player(requestObject(
+    return Player(request_object(
         'https://api.wynncraft.com/v2/player/{0}/stats',
         name
         ))

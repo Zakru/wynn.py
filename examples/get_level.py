@@ -4,13 +4,13 @@ Gets the level of a user's class.
 
 import sys
 
-from wynn.player import getPlayer
+from wynn.player import get_player
 
 def getLevel():
     user = sys.argv[1]
     cls = sys.argv[2]
 
-    print(getPlayer(user).classesDict[cls].level)
+    print(get_player(user).classesDict[cls].level)
 
 usage = """
 Usage:

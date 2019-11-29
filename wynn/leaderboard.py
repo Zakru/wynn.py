@@ -21,10 +21,10 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from .requests import requestLegacy, ObjectFromDict
+from .requests import request_legacy, ObjectFromDict
 
 
-def getGuildLeaderboard(timeframe=None):
+def get_guild_leaderboard(timeframe=None):
     """Gets a guild leaderboard from Wynncraft.
 
     :param timeframe: A time frame to get the leaderboard from. If
@@ -43,13 +43,13 @@ def getGuildLeaderboard(timeframe=None):
     if timeframe is None:
         timeframe = 'alltime'
 
-    return ObjectFromDict(requestLegacy(
+    return ObjectFromDict(request_legacy(
         'https://api.wynncraft.com/public_api.php?action=statsLeaderboard&type=guild&timeframe={0}',
         timeframe
         )).data
 
 
-def getPlayerLeaderboard(timeframe=None):
+def get_player_leaderboard(timeframe=None):
     """Gets a player leaderboard from Wynncraft.
 
     :param timeframe: A time frame to get the leaderboard from. If
@@ -68,13 +68,13 @@ def getPlayerLeaderboard(timeframe=None):
     if timeframe is None:
         timeframe = 'alltime'
 
-    return ObjectFromDict(requestLegacy(
+    return ObjectFromDict(request_legacy(
         'https://api.wynncraft.com/public_api.php?action=statsLeaderboard&type=player&timeframe={0}',
         timeframe
         )).data
 
 
-def getPVPLeaderboard(timeframe=None):
+def get_pvp_leaderboard(timeframe=None):
     """Gets a player leaderboard from Wynncraft sorted by PvP kills.
 
     :param timeframe: A time frame to get the leaderboard from. If
@@ -93,7 +93,7 @@ def getPVPLeaderboard(timeframe=None):
     if timeframe is None:
         timeframe = 'alltime'
 
-    return ObjectFromDict(requestLegacy(
+    return ObjectFromDict(request_legacy(
         'https://api.wynncraft.com/public_api.php?action=statsLeaderboard&type=pvp&timeframe={0}',
         timeframe
         )).data

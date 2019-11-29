@@ -21,22 +21,22 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from .requests import requestLegacy, ObjectFromDict
+from .requests import request_legacy, ObjectFromDict
 
 
-def getGuilds():
+def get_guilds():
     """Gets a list of guild names from the Wynncraft API.
 
     :returns: A :class:`list` of :class:`str` containing the names of
        all Wynncraft guilds.
     :rtype: :class:`list`
     """
-    return requestLegacy(
+    return request_legacy(
         'https://api.wynncraft.com/public_api.php?action=guildList'
         )['guilds']
 
 
-def getGuild(name):
+def get_guild(name):
     """Gets a guild's information from the Wynncraft API.
 
     Format: https://docs.wynncraft.com/Guild-API/#guild-object
@@ -47,7 +47,7 @@ def getGuild(name):
     :returns: The information of the guild as returned by the API
     :rtype: :class:`Guild`
     """
-    return Guild(requestLegacy(
+    return Guild(request_legacy(
         'https://api.wynncraft.com/public_api.php?action=guildStats&command={0}',
         name
         ))
