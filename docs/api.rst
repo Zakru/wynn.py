@@ -18,7 +18,7 @@ Player
 
 .. module:: wynn.player
 
-.. autofunction:: getPlayer
+.. autofunction:: get_player
 
 .. autoclass:: Player
    :members:
@@ -28,9 +28,9 @@ Guild
 
 .. module:: wynn.guild
 
-.. autofunction:: getGuilds
+.. autofunction:: get_guilds
 
-.. autofunction:: getGuild
+.. autofunction:: get_guild
 
 .. autoclass:: Guild
    :members:
@@ -40,49 +40,49 @@ Ingredient
 
 .. module:: wynn.ingredient
 
-.. autofunction:: getIngredientNames
+.. autofunction:: get_ingredient_names
 
-.. autofunction:: getIngredient
+.. autofunction:: get_ingredient
 
-.. autofunction:: searchIngredients
+.. autofunction:: search_ingredients
 
 Recipe
 ------
 
 .. module:: wynn.recipe
 
-.. autofunction:: getRecipeIDs
+.. autofunction:: get_recipe_ids
 
-.. autofunction:: getRecipe
+.. autofunction:: get_recipe
 
-.. autofunction:: searchRecipes
+.. autofunction:: search_recipes
 
 Network
 -------
 
 .. module:: wynn.network
 
-.. autofunction:: getServers
+.. autofunction:: get_servers
 
-.. autofunction:: getPlayerSum
+.. autofunction:: get_player_sum
 
 Leaderboard
 -----------
 
 .. module:: wynn.leaderboard
 
-.. autofunction:: getGuildLeaderboard
+.. autofunction:: get_guild_leaderboard
 
-.. autofunction:: getPlayerLeaderboard
+.. autofunction:: get_player_leaderboard
 
-.. autofunction:: getPVPLeaderboard
+.. autofunction:: get_pvp_leaderboard
 
 Territory
 ---------
 
 .. module:: wynn.territory
 
-.. autofunction:: getTerritories
+.. autofunction:: get_territories
 
 Search
 ------
@@ -96,4 +96,4 @@ Item
 
 .. module:: wynn.item
 
-.. autofunction:: searchItem
+.. autofunction:: search_item
