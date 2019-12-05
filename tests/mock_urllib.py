@@ -25,3 +25,10 @@ def mock_urlopen(url):
         return MockResponse('{"WC1":["Player"],"request":{"timestamp":0,"version":0}}')
     elif url == 'https://api.wynncraft.com/public_api.php?action=onlinePlayersSum':
         return MockResponse('{"players_online":1,"request":{"timestamp":0,"version":0}}')
+    elif url == 'https://api.wynncraft.com/public_api.php?action=guildList':
+        return MockResponse('{"guilds":["GuildName"],"request":{"timestamp":0,"version":0}}')
+    elif url == 'https://api.wynncraft.com/public_api.php?action=guildStats&command=ValidGuild':
+        return MockResponse('{"name":"ValidGuild","members":[{"name":"Player","rank":"OWNER"}],"request":{"timestamp":0,"version":0}}')
+    elif re.match(r'https://api\.wynncraft\.com/public_api\.php\?action=guildStats&command=.+', url):
+        return MockResponse('{"error":"Guild not found"}')
+
