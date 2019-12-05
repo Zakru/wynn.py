@@ -31,4 +31,14 @@ def mock_urlopen(url):
         return MockResponse('{"name":"ValidGuild","members":[{"name":"Player","rank":"OWNER"}],"request":{"timestamp":0,"version":0}}')
     elif re.match(r'https://api\.wynncraft\.com/public_api\.php\?action=guildStats&command=.+', url):
         return MockResponse('{"error":"Guild not found"}')
+    elif url == 'https://api.wynncraft.com/v2/ingredient/list':
+        return MockResponse('{"data":["Ingredient"]}')
+    elif url == 'https://api.wynncraft.com/v2/ingredient/get/Valid_Ingredient':
+        return MockResponse('{"data":[{"name":"Ingredient"}]}')
+    elif re.match(r'https://api\.wynncraft\.com/v2/ingredient/get/.+', url):
+        raise HTTPError(url, 400, 'Bad Request', None, None)
+    elif url == 'https://api.wynncraft.com/v2/ingredient/search/name/Ingredient':
+        return MockResponse('{"data":[{"name":"Ingredient"}]}')
+    elif url == 'https://api.wynncraft.com/v2/ingredient/search/_/_':
+        raise HTTPError(url, 400, 'Bad Request', None, None)
 
