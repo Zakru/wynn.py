@@ -44,7 +44,7 @@ def search_item(*, name=None, category=None):
        :class:`ObjectFromDict <wynn.requests.ObjectFromDict>`
     :rtype: :class:`list`
     """
-    if name is None and category is None:
+    if not name and not category:
         raise TypeError('Must provide at least one of name or category')
 
     if name is None:
@@ -52,7 +52,7 @@ def search_item(*, name=None, category=None):
     if category is None:
         category = ''
 
-    return map(ObjectFromDict, request_legacy(
+    return list(map(ObjectFromDict, request_legacy(
         'https://api.wynncraft.com/public_api.php?action=statsSearch&search={0}&category={1}',
         name, category,
-        )['items'])
+        )['items']))
