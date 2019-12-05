@@ -21,3 +21,7 @@ def mock_urlopen(url):
         return MockResponse('{"data":[{"classes":[]}]}')
     elif re.match(r'https://api\.wynncraft\.com/v2/player/.+?/stats', url):
         raise HTTPError(url, 400, 'Bad Request', None, None)
+    elif url == 'https://api.wynncraft.com/public_api.php?action=onlinePlayers':
+        return MockResponse('{"WC1":["Player"],"request":{"timestamp":0,"version":0}}')
+    elif url == 'https://api.wynncraft.com/public_api.php?action=onlinePlayersSum':
+        return MockResponse('{"players_online":1,"request":{"timestamp":0,"version":0}}')

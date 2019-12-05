@@ -5,12 +5,12 @@ from wynn import player
 
 import mock_urllib
 
+
 @patch('urllib.request.urlopen', mock_urllib.mock_urlopen)
 class TestGetPlayer(TestCase):
     """Test wynn.player.get_player
     
-    HTTP responses are mocked to return a minimal success response for
-    ValidPlayer and raise an HTTPError otherwise.
+    HTTP responses are mocked.
     """
 
     def test_get_player_with_invalid_player(self):
