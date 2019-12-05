@@ -21,6 +21,8 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
+from urllib.error import HTTPError
+
 from .requests import request_object, ObjectFromDict
 
 
@@ -32,14 +34,18 @@ def get_player(name):
     :param name: The name of the Player
     :type name: :class:`str`
 
-    :returns: The Player returned by the API
+    :returns: The Player returned by the API or ``None`` if not found
     :rtype: :class:`Player`
     """
-
-    return Player(request_object(
-        'https://api.wynncraft.com/v2/player/{0}/stats',
-        name
-        ))
+    try:
+        return Player(request_object(
+            'https://api.wynncraft.com/v2/player/{0}/stats',
+            name
+            ))
+    except HTTPError as e:
+        if e.code == 400:
+            return None
+        raise e
 
 
 class Player(ObjectFromDict):
