@@ -21,6 +21,8 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
+from urllib.error import HTTPError
+
 from .requests import request_list, request_object, ObjectFromDict
 
 
@@ -47,10 +49,18 @@ def get_recipe(id):
     :returns: The Recipe returned by the API
     :rtype: :class:`ObjectFromDict <wynn.requests.ObjectFromDict>`
     """
-    return ObjectFromDict(request_object(
-        'https://api.wynncraft.com/v2/recipe/get/{0}',
-        id
-        ))
+    try:
+        response = request_list(
+            'https://api.wynncraft.com/v2/recipe/get/{0}',
+            id
+            )
+        if not response:
+            return None
+        return ObjectFromDict(response[0])
+    except HTTPError as e:
+        if e.code == 400:
+            return None
+        raise e
 
 def search_recipes(query, args):
     """Searches for recipes from the Wynncraft API. See
@@ -66,7 +76,12 @@ def search_recipes(query, args):
        :class:`ObjectFromDict <wynn.requests.ObjectFromDict>`
     :rtype: :class:`list`
     """
-    return map(ObjectFromDict, request_list(
-        'https://api.wynncraft.com/v2/recipe/search/{0}/{1}',
-        query, args,
-        ))
+    try:
+        return list(map(ObjectFromDict, request_list(
+            'https://api.wynncraft.com/v2/recipe/search/{0}/{1}',
+            query, args,
+            )))
+    except HTTPError as e:
+        if e.code == 400:
+            return []
+        raise e
