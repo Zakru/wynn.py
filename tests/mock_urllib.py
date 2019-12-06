@@ -61,5 +61,9 @@ def mock_urlopen(url):
         raise HTTPError(url, 400, 'Bad Request', None, None)
     elif url == 'https://api.wynncraft.com/v2/recipe/search/type/Boots':
         return MockResponse('{"data":[{"id":"Boots-1-3"}]}')
+    elif url == 'https://api.wynncraft.com/public_api.php?action=statsSearch&search=':
+        return MockResponse('{"error":"Search required"}')
+    elif url == 'https://api.wynncraft.com/public_api.php?action=statsSearch&search=Name':
+        return MockResponse('{"guilds":["GuildName"],"players":["PlayerName"],"request":{"timestamp":0,"version":0}}')
     raise Exception('Unexpected HTTP request: {0}'.format(url))
 
