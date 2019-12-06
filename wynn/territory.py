@@ -35,4 +35,9 @@ def get_territories():
        representing every territory
     :rtype: :class:`list`
     """
-    return ObjectFromDict(request_legacy('https://api.wynncraft.com/public_api.php?action=territoryList'))
+    return list(map(
+        ObjectFromDict,
+        request_legacy(
+            'https://api.wynncraft.com/public_api.php?action=territoryList'
+            )['territories'].values()
+        ))
