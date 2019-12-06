@@ -53,6 +53,6 @@ def search_item(*, name=None, category=None):
         category = ''
 
     return list(map(ObjectFromDict, request_legacy(
-        'https://api.wynncraft.com/public_api.php?action=statsSearch&search={0}&category={1}',
+        'https://api.wynncraft.com/public_api.php?action=itemDB&search={0}&category={1}',
         name, category,
         )['items']))

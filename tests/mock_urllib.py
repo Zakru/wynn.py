@@ -41,7 +41,7 @@ def mock_urlopen(url):
         return MockResponse('{"data":[{"name":"Ingredient"}]}')
     elif url == 'https://api.wynncraft.com/v2/ingredient/search/_/_':
         raise HTTPError(url, 400, 'Bad Request', None, None)
-    elif url == 'https://api.wynncraft.com/public_api.php?action=statsSearch&search=Item&category=':
+    elif url == 'https://api.wynncraft.com/public_api.php?action=itemDB&search=Item&category=':
         return MockResponse('{"items":[{"name":"Item"}],"request":{"timestamp":0,"version":0}}')
     elif url == 'https://api.wynncraft.com/public_api.php?action=statsLeaderboard&type=player&timeframe=alltime':
         return MockResponse('{"data":[{"name":"Player"}],"request":{"timestamp":0,"version":0}}')
