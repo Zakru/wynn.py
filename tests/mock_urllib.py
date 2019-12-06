@@ -65,5 +65,7 @@ def mock_urlopen(url):
         return MockResponse('{"error":"Search required"}')
     elif url == 'https://api.wynncraft.com/public_api.php?action=statsSearch&search=Name':
         return MockResponse('{"guilds":["GuildName"],"players":["PlayerName"],"request":{"timestamp":0,"version":0}}')
+    elif url == 'https://api.wynncraft.com/public_api.php?action=territoryList':
+        return MockResponse('{"territories":{"Territory Name":{}},"request":{"timestamp":0,"version":0}}')
     raise Exception('Unexpected HTTP request: {0}'.format(url))
 
