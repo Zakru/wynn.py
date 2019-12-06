@@ -49,5 +49,17 @@ def mock_urlopen(url):
         return MockResponse('{"data":[{"name":"Player"}],"request":{"timestamp":0,"version":0}}')
     elif url == 'https://api.wynncraft.com/public_api.php?action=statsLeaderboard&type=guild&timeframe=alltime':
         return MockResponse('{"data":[{"name":"Guild"}],"request":{"timestamp":0,"version":0}}')
+    elif url == 'https://api.wynncraft.com/v2/recipe/get/Boots-1-3':
+        return MockResponse('{"data":[{"id":"Boots-1-3"}]}')
+    elif url == 'https://api.wynncraft.com/v2/recipe/get/Invalid-1-3':
+        return MockResponse('{"data":[]}')
+    elif re.match(r'https://api\.wynncraft\.com/v2/recipe/get/.+', url):
+        raise HTTPError(url, 400, 'Bad Request', None, None)
+    elif url == 'https://api.wynncraft.com/v2/recipe/list':
+        return MockResponse('{"data":["Boots-1-3"]}')
+    elif url == 'https://api.wynncraft.com/v2/recipe/search/_/_':
+        raise HTTPError(url, 400, 'Bad Request', None, None)
+    elif url == 'https://api.wynncraft.com/v2/recipe/search/type/Boots':
+        return MockResponse('{"data":[{"id":"Boots-1-3"}]}')
     raise Exception('Unexpected HTTP request: {0}'.format(url))
 
