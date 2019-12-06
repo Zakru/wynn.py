@@ -21,6 +21,8 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
+from urllib.error import HTTPError
+
 from .requests import request_list, request_object, ObjectFromDict
 
 
@@ -44,13 +46,20 @@ def get_ingredient(name):
     :param name: The name of the Ingredient
     :type name: :class:`str`
 
-    :returns: The Ingredient returned by the API
+    :returns: The Ingredient returned by the API or ``None`` if not
+       found
     :rtype: :class:`ObjectFromDict <wynn.requests.ObjectFromDict>`
     """
-    return ObjectFromDict(request_object(
-        'https://api.wynncraft.com/v2/ingredient/get/{0}',
-        name.replace(' ', '_')
-        ))
+    try:
+        return ObjectFromDict(request_object(
+            'https://api.wynncraft.com/v2/ingredient/get/{0}',
+            name.replace(' ', '_')
+            ))
+    except HTTPError as e:
+        if e.code == 400:
+            return None
+        raise e
+
 
 def search_ingredients(query, args):
     """Searches for ingredients from the Wynncraft API. See
@@ -63,10 +72,16 @@ def search_ingredients(query, args):
     :type args: :class:`str`
 
     :returns: A list of ingredients as
-       :class:`ObjectFromDict <wynn.requests.ObjectFromDict>`
+       :class:`ObjectFromDict <wynn.requests.ObjectFromDict>`. Empty if
+       the query fails.
     :rtype: :class:`list`
     """
-    return map(ObjectFromDict, request_list(
-        'https://api.wynncraft.com/v2/ingredient/search/{0}/{1}',
-        query, args,
-        ))
+    try:
+        return list(map(ObjectFromDict, request_list(
+            'https://api.wynncraft.com/v2/ingredient/search/{0}/{1}',
+            query, args,
+            )))
+    except HTTPError as e:
+        if e.code == 400:
+            return []
+        raise e

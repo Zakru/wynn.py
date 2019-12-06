@@ -61,7 +61,8 @@ def request_legacy(url, *args, **kwargs):
     :rtype: :class:`dict`
     """
     data = request(url, *args, **kwargs)
-    del data['request']
+    if 'request' in data:
+        del data['request']
     return data
 
 

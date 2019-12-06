@@ -44,13 +44,17 @@ def get_guild(name):
     :param name:
     :type name: :class:`str`
 
-    :returns: The information of the guild as returned by the API
+    :returns: The information of the guild as returned by the API or
+       ``None`` if not found
     :rtype: :class:`Guild`
     """
-    return Guild(request_legacy(
+    res = request_legacy(
         'https://api.wynncraft.com/public_api.php?action=guildStats&command={0}',
         name
-        ))
+        )
+    if 'error' in res:
+        return None        
+    return Guild(res)
 
 
 class Guild(ObjectFromDict):

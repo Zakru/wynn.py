@@ -34,7 +34,10 @@ def search(name):
        results and ``players`` containing player name results
     :rtype: :class:`ObjectFromDict <wynn.requests.ObjectFromDict>`
     """
-    return ObjectFromDict(request_legacy(
+    res = request_legacy(
         'https://api.wynncraft.com/public_api.php?action=statsSearch&search={0}',
         name,
-        ))
+        )
+    if 'error' in res:
+        return ObjectFromDict({'guilds': [], 'players': []})
+    return ObjectFromDict(res)
