@@ -31,7 +31,8 @@ def search(name):
     :type name: :class:`str`
 
     :returns: An object with attribute ``guilds`` containing guild name
-       results and ``players`` containing player name results
+       results and ``players`` containing player name results. The lists
+       are empty if the query failed.
     :rtype: :class:`ObjectFromDict <wynn.requests.ObjectFromDict>`
     """
     res = request_legacy(

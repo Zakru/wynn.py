@@ -73,7 +73,8 @@ def search_recipes(query, args):
     :type args: :class:`str`
 
     :returns: A list of recipes as
-       :class:`ObjectFromDict <wynn.requests.ObjectFromDict>`
+       :class:`ObjectFromDict <wynn.requests.ObjectFromDict>`. Empty if
+       the query failed.
     :rtype: :class:`list`
     """
     try:
