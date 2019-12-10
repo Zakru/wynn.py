@@ -43,10 +43,10 @@ def get_guild_leaderboard(timeframe=None):
     if timeframe is None:
         timeframe = 'alltime'
 
-    return ObjectFromDict(request_legacy(
+    return list(ObjectFromDict(request_legacy(
         'https://api.wynncraft.com/public_api.php?action=statsLeaderboard&type=guild&timeframe={0}',
         timeframe
-        )).data
+        )).data)
 
 
 def get_player_leaderboard(timeframe=None):
@@ -68,10 +68,10 @@ def get_player_leaderboard(timeframe=None):
     if timeframe is None:
         timeframe = 'alltime'
 
-    return ObjectFromDict(request_legacy(
+    return list(ObjectFromDict(request_legacy(
         'https://api.wynncraft.com/public_api.php?action=statsLeaderboard&type=player&timeframe={0}',
         timeframe
-        )).data
+        )).data)
 
 
 def get_pvp_leaderboard(timeframe=None):
@@ -93,7 +93,7 @@ def get_pvp_leaderboard(timeframe=None):
     if timeframe is None:
         timeframe = 'alltime'
 
-    return ObjectFromDict(request_legacy(
+    return list(ObjectFromDict(request_legacy(
         'https://api.wynncraft.com/public_api.php?action=statsLeaderboard&type=pvp&timeframe={0}',
         timeframe
-        )).data
+        )).data)

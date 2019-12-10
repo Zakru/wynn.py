@@ -97,8 +97,16 @@ def request_object(url, *args, **kwargs):
     return request_list(url, *args, **kwargs)[0]
 
 
+def _wrap_object(value):
+    if isinstance(value, dict):
+        return ObjectFromDict(value)
+    elif isinstance(value, list):
+        return DictObjectList(value)
+    return value
+
+
 class ObjectFromDict:
-    """Recursively wraps a :class:`dict` in a Python object.
+    """Wraps a :class:`dict` in a Python object.
 
     Example use::
 
@@ -106,21 +114,50 @@ class ObjectFromDict:
        >>> o.foo
        'bar'
 
-    :param data: The parsed JSON data from the Wynncraft API
+    :param data: Parsed JSON data
     :type data: :class:`dict`
     """
 
     def __init__(self, data):
-        for k,v in data.items():
-            self.__dict__[k] = self._handle_item(v)
+        self._data = data
 
-    def _handle_item(self, item):
-            if isinstance(item, dict):
-                return ObjectFromDict(item)
-            elif isinstance(item, list):
-                return [self._handle_item(v) for v in item]
-            else:
-                return item
+    def __getattr__(self, name):
+        try:
+            return _wrap_object(self._data[name])
+        except KeyError as e:
+            raise e
 
     def __repr__(self):
-        return dict.__repr__(self.__dict__)
+        return '{0}({1})'.format(type(self).__name__, repr(self._data))
+
+
+class DictObjectList:
+    """Wraps a :class:`list` in such a way that :class:`dict` objects
+    under it will be returned as :class:`ObjectFromDict`. Used
+    internally by :class:`ObjectFromDict`.
+    
+    :param data: A list from parsed JSON data
+    :type data: :class:`list`
+    """
+
+    def __init__(self, data):
+        self._data = data
+
+    def __getitem__(self, key):
+        try:
+            return _wrap_object(self._data[key])
+        except IndexError as e:
+            raise e
+
+    def __len__(self):
+        return self._data.__len__()
+
+    def __contains__(self, item):
+        return self._data.__contains__(item)
+
+    def __iter__(self):
+        for item in self._data:
+            yield _wrap_object(item)
+
+    def __repr__(self):
+        return '{0}({1})'.format(type(self).__name__, repr(self._data))

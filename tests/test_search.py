@@ -25,7 +25,7 @@ from unittest import TestCase
 from unittest.mock import patch
 
 from wynn import search
-from wynn.requests import ObjectFromDict
+from wynn.requests import ObjectFromDict, DictObjectList
 
 import mock_urllib
 
@@ -39,20 +39,20 @@ class TestSearch(TestCase):
 
     def test_search_with_empty_arg(self):
         """
-        search with an empty argument returns empty lists
+        search with an empty argument returns empty DictObjectLists
         """
         result = search.search('')
         self.assertIsInstance(result, ObjectFromDict)
-        self.assertIsInstance(result.guilds, list)
+        self.assertIsInstance(result.guilds, DictObjectList)
         self.assertFalse(result.guilds)
-        self.assertIsInstance(result.players, list)
+        self.assertIsInstance(result.players, DictObjectList)
         self.assertFalse(result.players)
 
     def test_search_with_non_empty_arg(self):
         """
-        search with a non-empty argument returns lists
+        search with a non-empty argument returns DictObjectLists
         """
         result = search.search('Name')
         self.assertIsInstance(result, ObjectFromDict)
-        self.assertIsInstance(result.guilds, list)
-        self.assertIsInstance(result.players, list)
+        self.assertIsInstance(result.guilds, DictObjectList)
+        self.assertIsInstance(result.players, DictObjectList)
