@@ -83,9 +83,7 @@ class TestSearchIngredients(TestCase):
 
     def test_search_ingredients_with_valid_query(self):
         """
-        search_ingredients with a valid query with results returns a
-        non-empty list
+        search_ingredients with a valid query returns a list
         """
         result = ingredient.search_ingredients('name', 'Ingredient')
         self.assertIsInstance(result, list)
-        self.assertTrue(result)
