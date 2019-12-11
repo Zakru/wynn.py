@@ -6,7 +6,7 @@ import sys
 
 from wynn.player import get_player
 
-def getLevel():
+def get_level():
     user = sys.argv[1]
     cls = sys.argv[2]
 
@@ -19,7 +19,7 @@ Usage:
 Gets the level of the specified class of the specified Wynncraft user.
 """
 
-if sys.argv[1] == '--help':
+if len(sys.argv) == 1 or sys.argv[1] == '--help':
     print(usage)
 else:
-    getLevel()
+    get_level()
