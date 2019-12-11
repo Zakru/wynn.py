@@ -48,6 +48,7 @@ def request(url, *args, **kwargs):
     response.close()
     return data
 
+
 def request_legacy(url, *args, **kwargs):
     """Requests a single JSON resource from the Wynncraft API in the
     legacy format.

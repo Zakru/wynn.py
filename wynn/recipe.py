@@ -62,6 +62,7 @@ def get_recipe(id):
             return None
         raise e
 
+
 def search_recipes(query, args):
     """Searches for recipes from the Wynncraft API. See
     https://docs.wynncraft.com/Recipe-API/#search for query
