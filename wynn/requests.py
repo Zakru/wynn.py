@@ -114,6 +114,8 @@ class ObjectFromDict:
        >>> o = ObjectFromDict({'foo': 'bar'})
        >>> o.foo
        'bar'
+       >>> o['foo']
+       'bar'
 
     :param data: Parsed JSON data
     :type data: :class:`dict`
@@ -125,6 +127,12 @@ class ObjectFromDict:
     def __getattr__(self, name):
         try:
             return _wrap_object(self._data[name])
+        except KeyError as e:
+            raise e
+
+    def __getitem__(self, key):
+        try:
+            return _wrap_object(self._data[key])
         except KeyError as e:
             raise e
 
