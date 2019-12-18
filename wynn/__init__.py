@@ -1,3 +1,3 @@
-__version__ = '0.1.0rc1'
+__version__ = '0.1.0rc2'
 
 from . import player, ingredient, recipe, guild, network, territory, leaderboard, search, item
