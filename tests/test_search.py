@@ -27,7 +27,7 @@ from unittest.mock import patch
 from wynn import search
 from wynn.requests import ObjectFromDict, DictObjectList
 
-import mock_urllib
+from . import mock_urllib
 
 
 @patch('urllib.request.urlopen', mock_urllib.mock_urlopen)
