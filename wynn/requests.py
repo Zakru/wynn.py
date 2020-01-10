@@ -141,6 +141,14 @@ class ObjectFromDict:
 
     def __repr__(self):
         return '{0}({1})'.format(type(self).__name__, repr(self._data))
+    
+    # pickle
+    def __getstate__(self):
+        return self._data
+    
+    # pickle
+    def __setstate__(self, state):
+        self._data = state
 
 
 class DictObjectList:
