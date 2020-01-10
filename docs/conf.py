@@ -21,7 +21,7 @@ from wynn import __version__ as wynn_version
 # -- Project information -----------------------------------------------------
 
 project = 'wynn.py'
-copyright = '2019, Zakru'
+copyright = '2020, Zakru'
 author = 'Zakru'
 
 # The full version, including alpha/beta/rc tags
