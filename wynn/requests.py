@@ -128,7 +128,7 @@ class ObjectFromDict:
         try:
             return _wrap_object(self._data[name])
         except KeyError as e:
-            raise e
+            raise AttributeError(e)
 
     def __getitem__(self, key):
         try:
