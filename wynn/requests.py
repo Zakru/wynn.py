@@ -135,6 +135,9 @@ class ObjectFromDict:
             return _wrap_object(self._data[key])
         except KeyError as e:
             raise e
+    
+    def __contains__(self, key):
+        return key in self._data
 
     def __repr__(self):
         return '{0}({1})'.format(type(self).__name__, repr(self._data))
