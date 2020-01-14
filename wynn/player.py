@@ -45,7 +45,7 @@ def get_player(name):
     except HTTPError as e:
         if e.code == 400:
             return None
-        raise e
+        raise
 
 
 class Player(ObjectFromDict):

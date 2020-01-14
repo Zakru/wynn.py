@@ -128,13 +128,13 @@ class ObjectFromDict:
         try:
             return _wrap_object(self._data[name])
         except KeyError as e:
-            raise AttributeError(e)
+            raise AttributeError(f"No attribute '{e.args[0]}' in this {type(self).__name__}") from e
 
     def __getitem__(self, key):
         try:
             return _wrap_object(self._data[key])
         except KeyError as e:
-            raise e
+            raise KeyError(*e.args) from e
     
     def __contains__(self, key):
         return key in self._data
@@ -167,7 +167,7 @@ class DictObjectList:
         try:
             return _wrap_object(self._data[key])
         except IndexError as e:
-            raise e
+            raise IndexError(*e.args) from e
 
     def __len__(self):
         return self._data.__len__()

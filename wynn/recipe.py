@@ -46,7 +46,7 @@ def get_recipe(id):
     :param name: The ID of the Recipe
     :type name: :class:`str`
 
-    :returns: The Recipe returned by the API
+    :returns: The Recipe returned by the API or ``None`` if not found
     :rtype: :class:`ObjectFromDict <wynn.requests.ObjectFromDict>`
     """
     try:
@@ -60,7 +60,7 @@ def get_recipe(id):
     except HTTPError as e:
         if e.code == 400:
             return None
-        raise e
+        raise
 
 
 def search_recipes(query, args):

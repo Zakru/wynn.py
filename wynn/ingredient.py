@@ -58,7 +58,7 @@ def get_ingredient(name):
     except HTTPError as e:
         if e.code == 400:
             return None
-        raise e
+        raise
 
 
 def search_ingredients(query, args):
@@ -84,4 +84,4 @@ def search_ingredients(query, args):
     except HTTPError as e:
         if e.code == 400:
             return []
-        raise e
+        raise
