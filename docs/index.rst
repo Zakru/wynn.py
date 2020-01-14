@@ -18,6 +18,14 @@ functionality.
 
    api
 
+Extensions
+----------
+
+.. toctree::
+   :maxdepth: 3
+
+   ext/cacher/index
+
 
 Indices and tables
 ==================

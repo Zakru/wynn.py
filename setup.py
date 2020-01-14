@@ -24,7 +24,7 @@ setup(
             'sphinx_rtd_theme~=0.4',
         ],
     },
-    packages=['wynn'],
+    packages=['wynn', 'wynn.ext.cacher'],
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
