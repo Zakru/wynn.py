@@ -77,6 +77,45 @@ class TestInAny(TestCase):
         self.assertFalse(self.cacher._in_any(self.not_in_a_sequence, self.sequences))
 
 
+class TestAllIn(TestCase):
+    """Test the utility function _all_in"""
+
+    def setUp(self):
+        self.all_in_sequence = [
+            'f',
+            'o',
+        ]
+        self.some_in_sequence = [
+            'o',
+            'a',
+        ]
+        self.none_in_sequence = [
+            'y',
+            'b',
+        ]
+        self.sequence = 'foo'
+        self.cacher = cacher.WynnCacher()
+
+    def test_all(self):
+        """
+        _in_any returns True when the items are found in the sequence
+        """
+        self.assertTrue(self.cacher._all_in(self.all_in_sequence, self.sequence))
+
+    def test_some(self):
+        """
+        _in_any returns False when some of the items are not found in the
+        sequence
+        """
+        self.assertFalse(self.cacher._all_in(self.some_in_sequence, self.sequence))
+
+    def test_none(self):
+        """
+        _in_any returns False when no item is found in the sequence
+        """
+        self.assertFalse(self.cacher._all_in(self.none_in_sequence, self.sequence))
+
+
 class TestAnyInAny(TestCase):
     """Test the utility function _any_in_any"""
 
@@ -266,6 +305,23 @@ class TestSearchIngredients(TestCase):
                 "agilityRequirement": 0,
             },
         })
+
+    def test_name_filter(self):
+        """
+        Ingredients get filtered by name
+        """
+        result = self.cacher.search_ingredients(name_includes='A')
+        self.assertEqual(len(result), 1)
+        self.assertIs(result[0], self.cacher.cache['ingredient']['Item A'])
+        result = self.cacher.search_ingredients(name_includes='B')
+        self.assertEqual(len(result), 1)
+        self.assertIs(result[0], self.cacher.cache['ingredient']['Item B'])
+        result = self.cacher.search_ingredients(name_includes='C')
+        self.assertEqual(len(result), 0)
+        result = self.cacher.search_ingredients(name_includes='A B')
+        self.assertEqual(len(result), 0)
+        result = self.cacher.search_ingredients(name_includes='Item')
+        self.assertEqual(len(result), 2)
 
     def test_level_filter(self):
         """

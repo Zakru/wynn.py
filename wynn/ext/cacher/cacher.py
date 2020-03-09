@@ -99,8 +99,8 @@ class WynnCacher:
                 ):
             self.cache['ingredient'][i.name] = i
 
-    def search_ingredients(self, *, level_min=None, level_max=None,
-            tier_min=None, tier_max=None, skills_include=None,
+    def search_ingredients(self, *, name_includes=None, level_min=None,
+            level_max=None, tier_min=None, tier_max=None, skills_include=None,
             identifications_include=None, durability_min=None,
             durability_max=None, item_only_ids=None):
         """Search the cached ingredients. All keyword arguments may be
@@ -113,6 +113,9 @@ class WynnCacher:
         :func:`wynn.ingredient.search_ingredients` to avoid making
         excessive requests to the HTTP API.
 
+        :param name_includes: Filter names by keywords
+           (case-insensitive)
+        :type name_includes: :class:`str`
         :param level_min: Filter with a minimum level (inclusive)
         :type level_min: :class:`int`
         :param level_max: Filter with a maximum level (inclusive)
@@ -144,6 +147,8 @@ class WynnCacher:
         :rtype: :class:`list`
         """
         ingredients = self.cache['ingredient'].values()
+        if name_includes is not None:
+            ingredients = filter(lambda i: self._all_in(name_includes.lower().split(' '), i.name.lower()), ingredients)
         if level_min is not None:
             ingredients = filter(lambda i: i.level >= level_min, ingredients)
         if level_max is not None:
@@ -175,6 +180,7 @@ class WynnCacher:
         sequences in ``sequences``
 
         :param item: The item to find
+        :param sequences: The sequences to check
 
         :returns: ``True`` if the item is found in any of the
             sequences, ``False`` otherwise
@@ -184,6 +190,21 @@ class WynnCacher:
             if item in s:
                 return True
         return False
+
+    def _all_in(self, items, sequence):
+        """Return ``True`` if all of ``items`` are found in ``sequence``
+
+        :param item: The items to find
+        :param sequences: The sequence to check
+
+        :returns: ``True`` if the item is found in any of the
+            sequences, ``False`` otherwise
+        :rtype: :class:`bool`
+        """
+        for item in items:
+            if item not in sequence:
+                return False
+        return True
 
     def _any_in_any(self, iterable_in, sequences):
         """Return ``True`` if any of the items in ``iterable_in``
