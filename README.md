@@ -11,5 +11,14 @@ API wrappers are found under the `wynn` package. To fetch a player's
 data, for example, you can use
 
 ```python
-wynn.player.get_player('playerName')
+>>> player = wynn.player.get_player('playerName')
+```
+
+Then there are two ways to access data inside
+
+```python
+>>> player.username
+'playerName'
+>>> player['username']
+'playerName'
 ```
