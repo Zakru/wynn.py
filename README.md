@@ -22,3 +22,8 @@ Then there are two ways to access data inside
 >>> player['username']
 'playerName'
 ```
+
+For documentation of the objects returned, see the Wynncraft API docs:
+https://docs.wynncraft.com/
+
+Relevant sections are also linked in this wrapper's documentation.
