@@ -1,5 +1,5 @@
 """
-Copyright 2020 Zakru
+Copyright 2020-2022 Zakru
 
 Permission is hereby granted, free of charge, to any person obtaining a
 copy of this software and associated documentation files
@@ -22,50 +22,53 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
 from unittest import TestCase
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 from wynn import leaderboard
 
-from . import mock_urllib
+from .mock_urllib import MockResponse
 
 
-@patch('urllib.request.urlopen', mock_urllib.mock_urlopen)
 class TestGetPlayerLeaderboard(TestCase):
     """Test wynn.leaderboard.get_player_leaderboard
-    
+
     HTTP responses are mocked.
     """
 
-    def test_get_player_leaderboard(self):
+    @patch('urllib.request.urlopen', return_value=MockResponse('{"data":[{"name":"Player"}],"request":{"timestamp":0,"version":0}}'))
+    def test_get_player_leaderboard(self, mock_urlopen: Mock):
         """
         get_player_leaderboard returns a list
         """
         self.assertIsInstance(leaderboard.get_player_leaderboard(), list)
+        mock_urlopen.assert_called_once_with('https://api.wynncraft.com/public_api.php?action=statsLeaderboard&type=player&timeframe=alltime')
 
 
-@patch('urllib.request.urlopen', mock_urllib.mock_urlopen)
 class TestGetPVPLeaderboard(TestCase):
     """Test wynn.leaderboard.get_pvp_leaderboard
-    
+
     HTTP responses are mocked.
     """
 
-    def test_get_pvp_leaderboard(self):
+    @patch('urllib.request.urlopen', return_value=MockResponse('{"data":[{"name":"Player"}],"request":{"timestamp":0,"version":0}}'))
+    def test_get_pvp_leaderboard(self, mock_urlopen: Mock):
         """
         get_pvp_leaderboard returns a list
         """
         self.assertIsInstance(leaderboard.get_pvp_leaderboard(), list)
+        mock_urlopen.assert_called_once_with('https://api.wynncraft.com/public_api.php?action=statsLeaderboard&type=pvp&timeframe=alltime')
 
 
-@patch('urllib.request.urlopen', mock_urllib.mock_urlopen)
 class TestGetGuildLeaderboard(TestCase):
     """Test wynn.leaderboard.get_guild_leaderboard
-    
+
     HTTP responses are mocked.
     """
 
-    def test_get_guild_leaderboard(self):
+    @patch('urllib.request.urlopen', return_value=MockResponse('{"data":[{"name":"Guild"}],"request":{"timestamp":0,"version":0}}'))
+    def test_get_guild_leaderboard(self, mock_urlopen: Mock):
         """
         get_guild_leaderboard returns a list
         """
         self.assertIsInstance(leaderboard.get_guild_leaderboard(), list)
+        mock_urlopen.assert_called_once_with('https://api.wynncraft.com/public_api.php?action=statsLeaderboard&type=guild&timeframe=alltime')

@@ -1,5 +1,5 @@
 """
-Copyright 2020 Zakru
+Copyright 2020-2022 Zakru
 
 Permission is hereby granted, free of charge, to any person obtaining a
 copy of this software and associated documentation files
@@ -22,17 +22,16 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
 from unittest import TestCase
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 from wynn import item
 
-from . import mock_urllib
+from .mock_urllib import MockResponse
 
 
-@patch('urllib.request.urlopen', mock_urllib.mock_urlopen)
 class TestSearchItem(TestCase):
     """Test wynn.item.search_item
-    
+
     HTTP responses are mocked.
     """
 
@@ -50,8 +49,10 @@ class TestSearchItem(TestCase):
         with self.assertRaises(TypeError):
             item.search_item(name='', category='')
 
-    def test_search_item_with_args(self):
+    @patch('urllib.request.urlopen', return_value=MockResponse('{"items":[{"name":"Item"}],"request":{"timestamp":0,"version":0}}'))
+    def test_search_item_with_args(self, mock_urlopen: Mock):
         """
         search_item with arguments returns a list
         """
         self.assertIsInstance(item.search_item(name='Item'), list)
+        mock_urlopen.assert_called_once_with('https://api.wynncraft.com/public_api.php?action=itemDB&search=Item&category=')

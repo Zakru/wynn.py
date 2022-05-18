@@ -1,5 +1,5 @@
 """
-Copyright 2020 Zakru
+Copyright 2020-2022 Zakru
 
 Permission is hereby granted, free of charge, to any person obtaining a
 copy of this software and associated documentation files
@@ -22,24 +22,28 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
 from unittest import TestCase
-from unittest.mock import patch
+from unittest.mock import Mock, patch
+from urllib.error import HTTPError
 
 from wynn import player
 
-from . import mock_urllib
+from .mock_urllib import MockResponse
 
 
-@patch('urllib.request.urlopen', mock_urllib.mock_urlopen)
 class TestGetPlayer(TestCase):
     """Test wynn.player.get_player
-    
+
     HTTP responses are mocked.
     """
 
-    def test_get_player_with_invalid_player(self):
+    @patch('urllib.request.urlopen', side_effect=HTTPError('https://api.wynncraft.com/v2/player/InvalidPlayer/stats', 400, 'Bad Request', None, None))
+    def test_get_player_with_invalid_player(self, mock_urlopen: Mock):
         """get_player with an invalid player's name returns None"""
         self.assertIsNone(player.get_player('InvalidPlayer'))
+        mock_urlopen.assert_called_once_with('https://api.wynncraft.com/v2/player/InvalidPlayer/stats')
 
-    def test_get_player_with_valid_player(self):
+    @patch('urllib.request.urlopen', return_value=MockResponse('{"data":[{"classes":[]}]}'))
+    def test_get_player_with_valid_player(self, mock_urlopen: Mock):
         """get_player with a valid player's name returns a Player"""
         self.assertIsInstance(player.get_player('ValidPlayer'), player.Player)
+        mock_urlopen.assert_called_once_with('https://api.wynncraft.com/v2/player/ValidPlayer/stats')
